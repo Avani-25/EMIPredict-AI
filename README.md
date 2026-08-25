@@ -30,7 +30,7 @@ classification and EMI prediction.
 
  📑 **Project Report**
  
- (https://docs.google.com/document/d/1uZon6u8wwxS6MS5L6dA3G956XqfDIAgUbv-ExaQiS0E/edit?usp=drive_link)
+ (https://drive.google.com/file/d/17xP3xCj1Ks9t_ojMye7IiZlsbxGPQxVv/view?usp=drive_link)
 
  📽 **Project Demo**
 
