@@ -28,6 +28,11 @@ classification and EMI prediction.
 - **Joblib**
 - **Git & GitHub**
 
+ 📑 **Project Report**
+ (https://docs.google.com/document/d/1uZon6u8wwxS6MS5L6dA3G956XqfDIAgUbv-ExaQiS0E/edit?usp=sharing)
+
+ 📽 **Project Demo**
+
   
 🎯 Project Goal
 
