@@ -1,9 +1,9 @@
 import streamlit as st
+from pathlib import Path
 
-# ============================================================
+# --------------------------------------------------
 # PAGE CONFIGURATION
-# ============================================================
-
+# --------------------------------------------------
 st.set_page_config(
     page_title="EMIPredict AI",
     page_icon="💰",
@@ -11,112 +11,79 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# --------------------------------------------------
+# PAGE PATH
+# --------------------------------------------------
+BASE_DIR = Path(__file__).parent
+PAGES_DIR = BASE_DIR / "pages"
 
-# ============================================================
-# HEADER
-# ============================================================
+# --------------------------------------------------
+# STREAMLIT NAVIGATION
+# --------------------------------------------------
+pages = [
+    st.Page(
+        PAGES_DIR / "1_Home.py",
+        title="Home",
+        icon="🏠"
+    ),
 
-st.title("💰 EMIPredict AI")
+    st.Page(
+        PAGES_DIR / "2_Data_Exploration.py",
+        title="Data Exploration",
+        icon="📊"
+    ),
 
-st.subheader(
-    "AI-Powered EMI Eligibility & Prediction System"
+    st.Page(
+        PAGES_DIR / "3_Classification.py",
+        title="Classification",
+        icon="🤖"
+    ),
+
+    st.Page(
+        PAGES_DIR / "4_Regression.py",
+        title="Regression",
+        icon="📈"
+    ),
+
+    st.Page(
+        PAGES_DIR / "5_Model_Performance.py",
+        title="Model Performance",
+        icon="📋"
+    ),
+
+    st.Page(
+        PAGES_DIR / "6_MLflow_Dashboard.py",
+        title="MLflow Dashboard",
+        icon="🔬"
+    ),
+
+    st.Page(
+        PAGES_DIR / "7_Admin.py",
+        title="Admin",
+        icon="⚙️"
+    )
+]
+
+# --------------------------------------------------
+# NAVIGATION
+# --------------------------------------------------
+pg = st.navigation(
+    pages,
+    position="sidebar",
+    expanded=True
 )
 
-st.markdown("---")
-
-
-# ============================================================
-# WELCOME SECTION
-# ============================================================
-
-st.header("Welcome 👋")
-
-st.write(
-    """
-    EMIPredict AI is an intelligent financial prediction application
-    designed to assist with EMI eligibility assessment and EMI prediction.
-    
-    Use the navigation menu on the left to explore data, make predictions,
-    evaluate models, and monitor MLflow experiments.
-    """
-)
-
-
-# ============================================================
-# FEATURE CARDS
-# ============================================================
-
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    st.info("🤖 Classification")
-    st.write(
-        "Predict whether an applicant is eligible for EMI."
-    )
-
-with col2:
-    st.info("📈 Regression")
-    st.write(
-        "Predict the expected EMI amount using machine learning."
-    )
-
-with col3:
-    st.info("🔬 MLflow")
-    st.write(
-        "Monitor experiments and compare model performance."
-    )
-
-
-# ============================================================
-# ADDITIONAL FEATURES
-# ============================================================
-
-st.markdown("---")
-
-st.header("🚀 Application Features")
-
-feature_col1, feature_col2 = st.columns(2)
-
-with feature_col1:
-    st.write("✅ EMI Eligibility Classification")
-    st.write("✅ EMI Amount Prediction")
-    st.write("✅ Data Exploration")
-    st.write("✅ Model Performance Analysis")
-
-with feature_col2:
-    st.write("✅ MLflow Experiment Tracking")
-    st.write("✅ Admin Dashboard")
-    st.write("✅ Interactive Streamlit Interface")
-    st.write("✅ Production-Ready Prediction Workflow")
-
-
-# ============================================================
-# FOOTER / STATUS
-# ============================================================
-
-st.markdown("---")
-
-st.success("🟢 EMIPredict AI is ready!")
-
-st.sidebar.title("📌 Navigation")
-
-st.sidebar.write(
-    """
-    Use the navigation menu above to explore:
-
-    **🏠 Home**  
-    **📊 Data Exploration**  
-    **🤖 Classification**  
-    **📈 Regression**  
-    **📋 Model Performance**  
-    **🔬 MLflow Dashboard**  
-    **⚙️ Admin**
-    """
-)
-
+# --------------------------------------------------
+# SIDEBAR FOOTER
+# --------------------------------------------------
 st.sidebar.markdown("---")
 
 st.sidebar.caption(
-    "EMIPredict AI • Machine Learning Application"
+    "💰 EMIPredict AI • Machine Learning Application"
 )
+
+# --------------------------------------------------
+# RUN SELECTED PAGE
+# --------------------------------------------------
+pg.run()
 
