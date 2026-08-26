@@ -9,7 +9,7 @@ st.set_page_config(
 
 pg = st.navigation(
     [
-        st.Page("pages/1_Home.py", title="Home", icon="🏠"),
+        st.Page("streamlit_app/pages/1_Home.py", title="Home", icon="🏠"),
         st.Page("pages/2_Data_Exploration.py", title="Data Exploration", icon="📊"),
         st.Page("pages/3_Classification.py", title="Classification", icon="🤖"),
         st.Page("pages/4_Regression.py", title="Regression", icon="📈"),
