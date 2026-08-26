@@ -5,9 +5,9 @@ classification and EMI prediction.
 
 ## 🚀 Live Demo
 
-👉 [Launch EMIPredict AI](https://emipredict-ai-4oukkb2jyoivwmuranyxzq.streamlit.app/)
+👉 [Launch EMIPredict AI]()
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://emipredict-ai-4oukkb2jyoivwmuranyxzq.streamlit.app/)
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)]()
 
 **Built with:** Python • Scikit-learn • Streamlit • Pandas • NumPy
 
