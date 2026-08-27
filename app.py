@@ -9,6 +9,8 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 MODEL_DIR = BASE_DIR / "notebooks"
+DATA_PATH = BASE_DIR / "notebooks" / "feature_engineered_dataset.csv"
+DATA_PATH = BASE_DIR / "notebooks" / "mlflow.db"
 
 
 CLASSIFICATION_MODEL_PATH = MODEL_DIR / "best_classification_model.pkl"
