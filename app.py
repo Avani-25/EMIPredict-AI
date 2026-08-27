@@ -23,7 +23,7 @@ pg = st.navigation(
         st.Page("3_Classification.py", title="Classification", icon="🤖"),
         st.Page("4_Regression.py", title="Regression", icon="📈"),
         st.Page("5_Model_Performance.py", title="Model Performance", icon="📋"),
-        st.Page("6_MLflow_Dashboard.py", title="MLflow Dashboard", icon="🔬"),
+        st.Page( "C:\Users\avani\Documents\EMIPredict-AI/notebooks/mlflow.db" ,"6_MLflow_Dashboard.py", title="MLflow Dashboard", icon="🔬"),
         st.Page("7_Admin.py", title="Admin", icon="⚙️"),
     ],
     position="sidebar"
