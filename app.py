@@ -112,6 +112,7 @@ pg = st.navigation(
         st.Page("5_Model_Performance.py", title="Model Performance", icon="📋"),
         st.Page("6_MLflow_Dashboard.py", title="MLflow Dashboard", icon="🔬"),
         st.Page("7_Admin.py", title="Admin", icon="⚙️"),
+        """
     ],
     position="sidebar"
 )
