@@ -98,11 +98,11 @@ st.markdown("---")
 
 st.success("🟢 EMIPredict AI is ready!")
 
-st.sidebar.title("📌 Navigation")
 
-st.sidebar.write(
-    """
-    Use the navigation menu above to explore:
+# ============================================================
+# NAVIGATION
+# ============================================================
+
 pg = st.navigation(
     [
         st.Page("1_Home.py", title="Home", icon="🏠"),
@@ -112,10 +112,8 @@ pg = st.navigation(
         st.Page("5_Model_Performance.py", title="Model Performance", icon="📋"),
         st.Page("6_MLflow_Dashboard.py", title="MLflow Dashboard", icon="🔬"),
         st.Page("7_Admin.py", title="Admin", icon="⚙️"),
-        """
     ],
     position="sidebar"
-)
 )
 
 st.sidebar.markdown("---")
@@ -123,4 +121,7 @@ st.sidebar.markdown("---")
 st.sidebar.caption(
     "EMIPredict AI • Machine Learning Application"
 )
+
+pg.run()
+
 
