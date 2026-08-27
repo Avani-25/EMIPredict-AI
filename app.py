@@ -8,7 +8,7 @@ st.set_page_config(
 )
 
 # Folder where app.py is located
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Page files
 pages = [
