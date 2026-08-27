@@ -1,46 +1,55 @@
 import streamlit as st
-
-# ============================================================
-# PAGE CONFIGURATION
-# ============================================================
+from pathlib import Path
 
 st.set_page_config(
     page_title="EMIPredict AI",
     page_icon="💰",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    layout="wide"
 )
 
+# Folder where app.py is located
+BASE_DIR = Path(__file__).resolve().parent
 
-# ============================================================
-# NAVIGATION
-# ============================================================
+# Page files
+pages = [
+    st.Page(
+        str(BASE_DIR / "1_Home.py"),
+        title="Home",
+        icon="🏠"
+    ),
+    st.Page(
+        str(BASE_DIR / "2_Data_Exploration.py"),
+        title="Data Exploration",
+        icon="📊"
+    ),
+    st.Page(
+        str(BASE_DIR / "3_Classification.py"),
+        title="Classification",
+        icon="🤖"
+    ),
+    st.Page(
+        str(BASE_DIR / "4_Regression.py"),
+        title="Regression",
+        icon="📈"
+    ),
+    st.Page(
+        str(BASE_DIR / "5_Model_Performance.py"),
+        title="Model Performance",
+        icon="📋"
+    ),
+    st.Page(
+        str(BASE_DIR / "6_MLflow_Dashboard.py"),
+        title="MLflow Dashboard",
+        icon="🔬"
+    ),
+    st.Page(
+        str(BASE_DIR / "7_Admin.py"),
+        title="Admin",
+        icon="⚙️"
+    ),
+]
 
-pg = st.navigation(
-    [
-        st.Page("1_Home.py", title="Home", icon="🏠"),
-        st.Page("2_Data_Exploration.py", title="Data Exploration", icon="📊"),
-        st.Page("3_Classification.py", title="Classification", icon="🤖"),
-        st.Page("4_Regression.py", title="Regression", icon="📈"),
-        st.Page("5_Model_Performance.py", title="Model Performance", icon="📋"),
-        st.Page( "C:\Users\avani\Documents\EMIPredict-AI/notebooks/mlflow.db" ,"6_MLflow_Dashboard.py", title="MLflow Dashboard", icon="🔬"),
-        st.Page("7_Admin.py", title="Admin", icon="⚙️"),
-    ],
-    position="sidebar"
-)
-
-
-# ============================================================
-# SIDEBAR FOOTER
-# ============================================================
-
-st.sidebar.markdown("---")
-st.sidebar.caption("💰 EMIPredict AI • Machine Learning Application")
-
-
-# ============================================================
-# RUN SELECTED PAGE
-# ============================================================
+pg = st.navigation(pages)
 
 pg.run()
 
