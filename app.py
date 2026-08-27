@@ -25,7 +25,7 @@ st.set_page_config(
 # parent       = streamlit_app
 # parent.parent = EMIPredict-AI
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 NOTEBOOKS_DIR = BASE_DIR / "notebooks"
 PAGES_DIR = Path(__file__).resolve().parent / "pages"
