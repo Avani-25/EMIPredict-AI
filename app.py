@@ -1,123 +1,74 @@
 import streamlit as st
-
-# ============================================================
-# PAGE CONFIGURATION
-# ============================================================
-
-st.set_page_config(
-    page_title="EMIPredict AI",
-    page_icon="💰",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+import joblib
+from pathlib import Path
 
 
 # ============================================================
-# HEADER
+# PROJECT PATHS
 # ============================================================
 
-st.title("💰 EMIPredict AI")
-
-st.subheader(
-    "AI-Powered EMI Eligibility & Prediction System"
-)
-
-st.markdown("---")
+BASE_DIR = Path(__file__).resolve().parent.parent
+MODEL_DIR = BASE_DIR / "notebooks"
 
 
-# ============================================================
-# WELCOME SECTION
-# ============================================================
-
-st.header("Welcome 👋")
-
-st.write(
-    """
-    EMIPredict AI is an intelligent financial prediction application
-    designed to assist with EMI eligibility assessment and EMI prediction.
-    
-    Use the navigation menu on the left to explore data, make predictions,
-    evaluate models, and monitor MLflow experiments.
-    """
-)
+CLASSIFICATION_MODEL_PATH = MODEL_DIR / "best_classification_model.pkl"
+REGRESSION_MODEL_PATH = MODEL_DIR / "best_regression_model.pkl"
+XGB_REGRESSION_MODEL_PATH = MODEL_DIR / "best_regression_model_xgb.pkl"
+REGRESSION_PREPROCESSOR_PATH = MODEL_DIR / "regression_preprocessor.pkl"
+TARGET_ENCODER_PATH = MODEL_DIR / "target_encoder.pkl"
 
 
 # ============================================================
-# FEATURE CARDS
+# LOAD MODELS
 # ============================================================
 
-col1, col2, col3 = st.columns(3)
+@st.cache_resource
+def load_models():
 
-with col1:
-    st.info("🤖 Classification")
-    st.write(
-        "Predict whether an applicant is eligible for EMI."
+    classification_model = joblib.load(CLASSIFICATION_MODEL_PATH)
+
+    regression_model = joblib.load(REGRESSION_MODEL_PATH)
+
+    xgb_regression_model = joblib.load(XGB_REGRESSION_MODEL_PATH)
+
+    regression_preprocessor = joblib.load(
+        REGRESSION_PREPROCESSOR_PATH
     )
 
-with col2:
-    st.info("📈 Regression")
-    st.write(
-        "Predict the expected EMI amount using machine learning."
+    target_encoder = joblib.load(
+        TARGET_ENCODER_PATH
     )
 
-with col3:
-    st.info("🔬 MLflow")
-    st.write(
-        "Monitor experiments and compare model performance."
+    return (
+        classification_model,
+        regression_model,
+        xgb_regression_model,
+        regression_preprocessor,
+        target_encoder
     )
 
 
 # ============================================================
-# ADDITIONAL FEATURES
+# SAFE MODEL LOADING
 # ============================================================
 
-st.markdown("---")
+try:
 
-st.header("🚀 Application Features")
+    (
+        classification_model,
+        regression_model,
+        xgb_regression_model,
+        regression_preprocessor,
+        target_encoder
+    ) = load_models()
 
-feature_col1, feature_col2 = st.columns(2)
+except Exception as e:
 
-with feature_col1:
-    st.write("✅ EMI Eligibility Classification")
-    st.write("✅ EMI Amount Prediction")
-    st.write("✅ Data Exploration")
-    st.write("✅ Model Performance Analysis")
+    st.error("❌ Model loading failed.")
 
-with feature_col2:
-    st.write("✅ MLflow Experiment Tracking")
-    st.write("✅ Admin Dashboard")
-    st.write("✅ Interactive Streamlit Interface")
-    st.write("✅ Production-Ready Prediction Workflow")
+    with st.expander("Show technical details"):
+        st.exception(e)
 
-
-# ============================================================
-# FOOTER / STATUS
-# ============================================================
-
-st.markdown("---")
-
-st.success("🟢 EMIPredict AI is ready!")
-
-st.sidebar.title("📌 Navigation")
-
-st.sidebar.write(
-    """
-    Use the navigation menu above to explore:
-
-    **🏠 Home**  
-    **📊 Data Exploration**  
-    **🤖 Classification**  
-    **📈 Regression**  
-    **📋 Model Performance**  
-    **🔬 MLflow Dashboard**  
-    **⚙️ Admin**
-    """
-)
-
-st.sidebar.markdown("---")
-
-st.sidebar.caption(
-    "EMIPredict AI • Machine Learning Application"
-)
+    st.stop()
 
 
