@@ -1,7 +1,4 @@
 import streamlit as st
-import matplotlib.pyplot as plt
-import joblib
-import mlflow
 
 # ============================================================
 # PAGE CONFIGURATION
@@ -13,93 +10,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-
-
-# ============================================================
-# HEADER
-# ============================================================
-
-st.title("💰 EMIPredict AI")
-
-st.subheader(
-    "AI-Powered EMI Eligibility & Prediction System"
-)
-
-st.markdown("---")
-
-
-# ============================================================
-# WELCOME SECTION
-# ============================================================
-
-st.header("Welcome 👋")
-
-st.write(
-    """
-    EMIPredict AI is an intelligent financial prediction application
-    designed to assist with EMI eligibility assessment and EMI prediction.
-    
-    Use the navigation menu on the left to explore data, make predictions,
-    evaluate models, and monitor MLflow experiments.
-    """
-)
-
-
-# ============================================================
-# FEATURE CARDS
-# ============================================================
-
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    st.info("🤖 Classification")
-    st.write(
-        "Predict whether an applicant is eligible for EMI."
-    )
-
-with col2:
-    st.info("📈 Regression")
-    st.write(
-        "Predict the expected EMI amount using machine learning."
-    )
-
-with col3:
-    st.info("🔬 MLflow")
-    st.write(
-        "Monitor experiments and compare model performance."
-    )
-
-
-# ============================================================
-# ADDITIONAL FEATURES
-# ============================================================
-
-st.markdown("---")
-
-st.header("🚀 Application Features")
-
-feature_col1, feature_col2 = st.columns(2)
-
-with feature_col1:
-    st.write("✅ EMI Eligibility Classification")
-    st.write("✅ EMI Amount Prediction")
-    st.write("✅ Data Exploration")
-    st.write("✅ Model Performance Analysis")
-
-with feature_col2:
-    st.write("✅ MLflow Experiment Tracking")
-    st.write("✅ Admin Dashboard")
-    st.write("✅ Interactive Streamlit Interface")
-    st.write("✅ Production-Ready Prediction Workflow")
-
-
-# ============================================================
-# FOOTER / STATUS
-# ============================================================
-
-st.markdown("---")
-
-st.success("🟢 EMIPredict AI is ready!")
 
 
 # ============================================================
@@ -119,11 +29,18 @@ pg = st.navigation(
     position="sidebar"
 )
 
-st.sidebar.markdown("---")
 
-st.sidebar.caption(
-    "EMIPredict AI • Machine Learning Application"
-)
+# ============================================================
+# SIDEBAR FOOTER
+# ============================================================
+
+st.sidebar.markdown("---")
+st.sidebar.caption("💰 EMIPredict AI • Machine Learning Application")
+
+
+# ============================================================
+# RUN SELECTED PAGE
+# ============================================================
 
 pg.run()
 
