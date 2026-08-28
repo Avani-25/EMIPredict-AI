@@ -1,0 +1,17 @@
+import pandas as pd
+
+df = pd.read_csv("feature_engineered_dataset.csv")
+
+# Keep a representative sample for Streamlit
+sample_df = df.sample(
+    n=10000,
+    random_state=42
+)
+
+sample_df.to_csv(
+    "feature_engineered_dataset_sample.csv",
+    index=False
+)
+
+print("Original shape:", df.shape)
+print("Sample shape:", sample_df.shape)
