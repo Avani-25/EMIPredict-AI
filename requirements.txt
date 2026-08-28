@@ -6,7 +6,3 @@ scipy==1.18.0
 joblib==1.5.3
 xgboost==3.4.0
 openpyxl==3.1.5
-mlflow
-matplotlib
-seaborn
-plotly
