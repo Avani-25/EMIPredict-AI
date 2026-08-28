@@ -1,5 +1,4 @@
 import streamlit as st
-import joblib
 from pathlib import Path
 
 
@@ -19,149 +18,180 @@ st.set_page_config(
 # PROJECT PATHS
 # ============================================================
 
-# app.py is inside:
-# EMIPredict-AI/streamlit_app/app.py
-#
-# parent       = streamlit_app
-# parent.parent = EMIPredict-AI
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-NOTEBOOKS_DIR = BASE_DIR / "notebooks"
-PAGES_DIR = Path(__file__).resolve().parent / "pages"
+BASE_DIR = Path(__file__).resolve().parent
+PAGES_DIR = BASE_DIR / "pages"
 
 
 # ============================================================
-# DATA PATHS
+# CUSTOM CSS
 # ============================================================
 
-DATA_PATH = NOTEBOOKS_DIR / "feature_engineered_dataset.csv"
+st.markdown(
+    """
+    <style>
 
-MLFLOW_DB_PATH = NOTEBOOKS_DIR / "mlflow.db"
+    /* Main title */
+    .main-title {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 0.2rem;
+    }
 
+    .subtitle {
+        font-size: 1.2rem;
+        opacity: 0.75;
+        margin-bottom: 2rem;
+    }
 
-# ============================================================
-# MODEL PATHS
-# ============================================================
+    /* Feature cards */
+    .card {
+        padding: 1.5rem;
+        border-radius: 15px;
+        border: 1px solid rgba(128,128,128,0.25);
+        margin-bottom: 1rem;
+        min-height: 170px;
+    }
 
-CLASSIFICATION_MODEL_PATH = (
-    NOTEBOOKS_DIR / "best_classification_model.pkl"
+    .card h3 {
+        margin-bottom: 0.5rem;
+    }
+
+    /* Sidebar */
+    section[data-testid="stSidebar"] {
+        border-right: 1px solid rgba(128,128,128,0.2);
+    }
+
+    </style>
+    """,
+    unsafe_allow_html=True
 )
 
-REGRESSION_MODEL_PATH = (
-    NOTEBOOKS_DIR / "best_regression_model.pkl"
-)
-
-XGB_REGRESSION_MODEL_PATH = (
-    NOTEBOOKS_DIR / "best_regression_model_xgb.pkl"
-)
-
-REGRESSION_PREPROCESSOR_PATH = (
-    NOTEBOOKS_DIR / "regression_preprocessor.pkl"
-)
-
-TARGET_ENCODER_PATH = (
-    NOTEBOOKS_DIR / "target_encoder.pkl"
-)
-
 
 # ============================================================
-# MODEL LOADING
+# CHECK PAGE FILES
 # ============================================================
 
-@st.cache_resource
-def load_models():
+required_pages = {
+    "Home": "1_Home.py",
+    "Data Exploration": "2_Data_Exploration.py",
+    "Classification": "3_Classification.py",
+    "Regression": "4_Regression.py",
+    "Model Performance": "5_Model_Performance.py",
+    "MLflow Dashboard": "6_MLflow_Dashboard.py",
+}
 
-    classification_model = joblib.load(
-        CLASSIFICATION_MODEL_PATH
+
+missing_pages = []
+
+for page_name, filename in required_pages.items():
+
+    page_path = PAGES_DIR / filename
+
+    if not page_path.exists():
+        missing_pages.append(filename)
+
+
+if missing_pages:
+
+    st.error("❌ Some Streamlit pages are missing.")
+
+    st.write("Missing files:")
+
+    for filename in missing_pages:
+        st.write(f"- `{filename}`")
+
+    st.info(
+        "Please make sure all page files are inside "
+        "`streamlit_app/pages/`."
     )
 
-    regression_model = joblib.load(
-        REGRESSION_MODEL_PATH
-    )
-
-    xgb_regression_model = joblib.load(
-        XGB_REGRESSION_MODEL_PATH
-    )
-
-    regression_preprocessor = joblib.load(
-        REGRESSION_PREPROCESSOR_PATH
-    )
-
-    target_encoder = joblib.load(
-        TARGET_ENCODER_PATH
-    )
-
-    return (
-        classification_model,
-        regression_model,
-        xgb_regression_model,
-        regression_preprocessor,
-        target_encoder
-    )
+    st.stop()
 
 
 # ============================================================
-# NAVIGATION
+# STREAMLIT NAVIGATION
 # ============================================================
 
-pg = st.navigation(
-    [
-        st.Page(
-            PAGES_DIR / "1_Home.py",
-            title="Home",
-            icon="🏠"
-        ),
+pages = [
 
-        st.Page(
-            PAGES_DIR / "2_Data_Exploration.py",
-            title="Data Exploration",
-            icon="📊"
-        ),
+    st.Page(
+        str(PAGES_DIR / "1_Home.py"),
+        title="Home",
+        icon="🏠",
+        default=True
+    ),
 
-        st.Page(
-            PAGES_DIR / "3_Classification.py",
-            title="Classification",
-            icon="🤖"
-        ),
+    st.Page(
+        str(PAGES_DIR / "2_Data_Exploration.py"),
+        title="Data Exploration",
+        icon="📊"
+    ),
 
-        st.Page(
-            PAGES_DIR / "4_Regression.py",
-            title="Regression",
-            icon="📈"
-        ),
+    st.Page(
+        str(PAGES_DIR / "3_Classification.py"),
+        title="Classification",
+        icon="🤖"
+    ),
 
-        st.Page(
-            PAGES_DIR / "5_Model_Performance.py",
-            title="Model Performance",
-            icon="📋"
-        ),
+    st.Page(
+        str(PAGES_DIR / "4_Regression.py"),
+        title="Regression",
+        icon="📈"
+    ),
 
-        st.Page(
-            PAGES_DIR / "6_MLflow_Dashboard.py",
-            title="MLflow Dashboard",
-            icon="🔬"
-        ),
+    st.Page(
+        str(PAGES_DIR / "5_Model_Performance.py"),
+        title="Model Performance",
+        icon="📋"
+    ),
 
-        st.Page(
-            PAGES_DIR / "7_Admin.py",
-            title="Admin",
-            icon="⚙️"
-        ),
-    ],
-    position="sidebar"
-)
+    st.Page(
+        str(PAGES_DIR / "6_MLflow_Dashboard.py"),
+        title="MLflow Dashboard",
+        icon="🔬"
+    ),
+]
 
 
 # ============================================================
-# SIDEBAR FOOTER
+# RUN NAVIGATION
 # ============================================================
 
-st.sidebar.markdown("---")
+pg = st.navigation(pages)
 
-st.sidebar.caption(
-    "💰 EMIPredict AI • Machine Learning Application"
-)
+
+# ============================================================
+# SIDEBAR
+# ============================================================
+
+with st.sidebar:
+
+    st.markdown("## 💰 EMIPredict AI")
+
+    st.caption(
+        "AI-powered EMI eligibility and prediction system"
+    )
+
+    st.markdown("---")
+
+    st.markdown("### 📌 Project Modules")
+
+    st.markdown(
+        """
+        🏠 **Home**  
+        📊 **Data Exploration**  
+        🤖 **Classification**  
+        📈 **Regression**  
+        📋 **Model Performance**  
+        🔬 **MLflow Dashboard**
+        """
+    )
+
+    st.markdown("---")
+
+    st.caption(
+        "AI & ML Project • Streamlit"
+    )
 
 
 # ============================================================
