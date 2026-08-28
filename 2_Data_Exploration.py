@@ -23,7 +23,7 @@ st.markdown(
 # DATASET PATH
 # --------------------------------------------------
 
-DATA_PATH = r"C:\Users\avani\Documents\EMIPredict-AI\notebooks\feature_engineered_dataset.csv"
+DATA_PATH = r"C:\Users\avani\Documents\EMIPredict-AI\notebooks\featureEngineered_sample.csv"
 
 # --------------------------------------------------
 # LOAD DATASET
@@ -32,7 +32,7 @@ DATA_PATH = r"C:\Users\avani\Documents\EMIPredict-AI\notebooks\feature_engineere
 try:
     df = pd.read_csv(DATA_PATH)
 
-    st.success("✅ Feature-engineered dataset loaded successfully!")
+    st.success("✅ Feature-engineered sample dataset loaded successfully!")
 
 except Exception as e:
     st.error(f"❌ Dataset loading failed: {e}")
